@@ -10,13 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#FFF8F2;
-    --ink:#2E2430;
-    --ink-soft:#5C4F5E;
-    --coral:#FF6B54;
-    --mustard:#FFB84D;
-    --sage:#7C9885;
-    --peach:#F4DCC5;
+    --cream:#FBFAF6;
+    --ink:#213629;
+    --ink-soft:#57685C;
+    --coral:#F0508A;
+    --mustard:#3FA66B;
+    --sage:#8FBFA0;
+    --peach:#FCE0EA;
     --white:#FFFFFF;
     --radius:18px;
     --max:1080px;
@@ -187,6 +187,41 @@
     padding:8px 14px; border-radius:999px; font-size:0.85rem; font-weight:500;
   }
 
+  /* MINI GAME */
+  .game-panel{
+    background:var(--white); border:1px solid rgba(46,36,48,0.08); border-radius:24px;
+    padding:32px; box-shadow:0 16px 40px rgba(46,36,48,0.06); position:relative;
+  }
+  .game-hud{display:flex; gap:28px; margin-bottom:16px; flex-wrap:wrap;}
+  .game-stat{display:flex; flex-direction:column;}
+  .game-stat-label{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft); font-weight:600;}
+  .game-stat span:last-child{font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:700; color:var(--ink);}
+  #gameLives{font-size:1.1rem !important; letter-spacing:2px; color:var(--coral) !important;}
+  .game-timer-track{height:6px; background:var(--cream); border-radius:999px; overflow:hidden; margin-bottom:22px;}
+  .game-timer-bar{height:100%; width:100%; background:var(--mustard); border-radius:999px; transform-origin:left; transition:width 0.1s linear, background 0.3s;}
+  .game-grid{
+    display:grid; grid-template-columns:repeat(6,1fr); gap:12px;
+    min-height:260px; align-content:center;
+  }
+  .game-dot{
+    aspect-ratio:1; border-radius:50%; border:none; cursor:pointer;
+    transform:scale(1); transition:transform 0.15s;
+  }
+  .game-dot:hover{transform:scale(1.08);}
+  .game-dot:focus-visible{outline:3px solid var(--ink); outline-offset:3px;}
+  .game-overlay{
+    position:absolute; inset:0; background:rgba(251,250,246,0.96); border-radius:24px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    padding:32px; gap:10px;
+  }
+  .game-overlay h3{font-size:1.5rem;}
+  .game-overlay p{color:var(--ink-soft); max-width:38ch;}
+  .game-overlay .btn{margin-top:10px;}
+  .game-overlay.is-hidden{display:none;}
+  @media (max-width:600px){
+    .game-grid{grid-template-columns:repeat(4,1fr);}
+  }
+
   /* TIMELINE */
   .timeline{position:relative; padding-left:28px; border-left:2px solid rgba(46,36,48,0.12); display:grid; gap:36px;}
   .t-item{position:relative;}
@@ -223,6 +258,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#game">Play</a></li>
       <li><a href="#experience">Experience</a></li>
     </ul>
     <a class="nav-cta" href="#contact">Let's talk</a>
@@ -360,6 +396,30 @@
     </div>
   </section>
 
+  <section id="game">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-tag"><span class="dot"></span>Take a break</div>
+        <h2>Spot the outlier</h2>
+        <p>The same instinct that catches a typo in a spreadsheet. Click the dot that doesn't match before time runs out — it gets harder each round.</p>
+      </div>
+      <div class="game-panel">
+        <div class="game-hud">
+          <div class="game-stat"><span class="game-stat-label">Score</span><span id="gameScore">0</span></div>
+          <div class="game-stat"><span class="game-stat-label">Best</span><span id="gameBest">0</span></div>
+          <div class="game-stat"><span class="game-stat-label">Lives</span><span id="gameLives">●●●</span></div>
+        </div>
+        <div class="game-timer-track"><div class="game-timer-bar" id="gameTimerBar"></div></div>
+        <div class="game-grid" id="gameGrid"></div>
+        <div class="game-overlay" id="gameOverlay">
+          <h3 id="gameOverlayTitle">Ready?</h3>
+          <p id="gameOverlayText">Click the dot that's a different shade. Three misses and it's over.</p>
+          <button class="btn btn-primary" id="gameStartBtn">Start</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="experience">
     <div class="wrap">
       <div class="section-head">
@@ -412,7 +472,7 @@
     { label: 'SQL', value: 0.9, color: 'var(--coral)' },
     { label: 'Tableau', value: 0.85, color: 'var(--mustard)' },
     { label: 'Python', value: 0.75, color: 'var(--sage)' },
-    { label: 'Power BI', value: 0.8, color: '#E8A0A0' },
+    { label: 'Power BI', value: 0.8, color: '#F5A8C6' },
     { label: 'Excel', value: 0.95, color: 'var(--coral)' },
     { label: 'JS', value: 0.65, color: 'var(--sage)' },
   ];
@@ -428,6 +488,109 @@
     el.appendChild(label);
     row.appendChild(el);
   });
+
+  // Spot-the-outlier mini game
+  (function(){
+    const grid = document.getElementById('gameGrid');
+    const overlay = document.getElementById('gameOverlay');
+    const overlayTitle = document.getElementById('gameOverlayTitle');
+    const overlayText = document.getElementById('gameOverlayText');
+    const startBtn = document.getElementById('gameStartBtn');
+    const scoreEl = document.getElementById('gameScore');
+    const bestEl = document.getElementById('gameBest');
+    const livesEl = document.getElementById('gameLives');
+    const timerBar = document.getElementById('gameTimerBar');
+
+    let score = 0, best = 0, lives = 3, round = 0;
+    let timerId = null, timeLeft = 0, roundDuration = 0, playing = false;
+
+    function baseHue(){ return 335; } // pink family, matches palette
+    function dotColor(hue, lightness){ return 'hsl(' + hue + ', 62%, ' + lightness + '%)'; }
+
+    function buildRound(){
+      round++;
+      const count = Math.min(11 + round * 3, 35);
+      roundDuration = Math.max(4.5 - round * 0.25, 1.8);
+      timeLeft = roundDuration;
+      const diff = Math.max(16 - round * 1.2, 3.5); // lightness gap shrinks = harder
+      const baseLight = 62;
+      const outlierIndex = Math.floor(Math.random() * count);
+
+      grid.innerHTML = '';
+      grid.style.gridTemplateColumns = 'repeat(' + Math.min(Math.ceil(Math.sqrt(count * 1.6)), 8) + ', 1fr)';
+
+      for(let i = 0; i < count; i++){
+        const dot = document.createElement('button');
+        dot.className = 'game-dot';
+        dot.setAttribute('aria-label', i === outlierIndex ? 'outlier dot' : 'dot');
+        const isOutlier = i === outlierIndex;
+        dot.style.background = dotColor(baseHue(), isOutlier ? baseLight + diff : baseLight);
+        dot.addEventListener('click', () => handlePick(isOutlier));
+        grid.appendChild(dot);
+      }
+
+      timerBar.style.transition = 'none';
+      timerBar.style.width = '100%';
+      timerBar.style.background = 'var(--mustard)';
+      requestAnimationFrame(() => {
+        timerBar.style.transition = 'width ' + roundDuration + 's linear, background 0.3s';
+        timerBar.style.width = '0%';
+      });
+
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        timeLeft -= 0.1;
+        if(timeLeft <= 0){
+          clearInterval(timerId);
+          loseLife("Too slow — that one got away.");
+        }
+      }, 100);
+    }
+
+    function handlePick(isOutlier){
+      if(!playing) return;
+      if(isOutlier){
+        clearInterval(timerId);
+        score++;
+        scoreEl.textContent = score;
+        buildRound();
+      } else {
+        loseLife("Not quite — that wasn't the outlier.");
+      }
+    }
+
+    function loseLife(message){
+      lives--;
+      livesEl.textContent = '●●●'.slice(0, lives) + '○○○'.slice(0, 3 - lives);
+      if(lives <= 0){
+        endGame(message);
+      } else {
+        buildRound();
+      }
+    }
+
+    function endGame(message){
+      playing = false;
+      clearInterval(timerId);
+      best = Math.max(best, score);
+      bestEl.textContent = best;
+      overlayTitle.textContent = 'Game over — score: ' + score;
+      overlayText.textContent = message + ' Give it another go?';
+      startBtn.textContent = 'Play again';
+      overlay.classList.remove('is-hidden');
+    }
+
+    function startGame(){
+      score = 0; lives = 3; round = 0;
+      scoreEl.textContent = 0;
+      livesEl.textContent = '●●●';
+      overlay.classList.add('is-hidden');
+      playing = true;
+      buildRound();
+    }
+
+    startBtn.addEventListener('click', startGame);
+  })();
 </script>
 
 </body>
