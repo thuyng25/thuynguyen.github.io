@@ -1,6 +1,8 @@
 # thuyng25.github.io
 
-My personal portfolio site, built to showcase my data analysis and visualization work while I job search for data analyst, BI, and operations roles.
+My personal portfolio site, built to showcase my data analysis and visualization work while I job search for data analyst, BI, and operations roles. 
+
+This site is built and designed with the help of Claude AI.
 
 **Live site:** [thuyng25.github.io](https://thuyng25.github.io/thuynguyen.github.io)
 
