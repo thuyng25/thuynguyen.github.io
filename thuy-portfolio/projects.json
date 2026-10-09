@@ -1,0 +1,50 @@
+[
+  {
+    "id": "peas-on-earth",
+    "number": "01",
+    "title": "Peas on Earth",
+    "category": "data",
+    "categoryLabel": "Data & maps",
+    "summary": "A team web GIS project exploring food access and transit equity across Seattle.",
+    "tools": ["Mapbox GL JS", "ArcGIS", "JavaScript"],
+    "url": "https://twickss.github.io/peas_on_earth",
+    "linkLabel": "Explore the map",
+    "notes": [
+      {"heading": "The question", "text": "How can a map help people understand food access in relation to Seattle's transit network?"},
+      {"heading": "The work", "text": "I worked with a team on an interactive mapping app that brings civic data into one place. The project combines my interests in visualization, geography, and questions about the city I live in."},
+      {"heading": "Take a look", "text": "The published app lets you explore the map yourself. This was a team project, and the live site includes our shared work."}
+    ]
+  },
+  {
+    "id": "campus-cop",
+    "number": "02",
+    "title": "Campus Cop",
+    "category": "web",
+    "categoryLabel": "Web apps",
+    "summary": "A campus safety reporting app built with a four-person team I led.",
+    "tools": ["Firebase", "React", "Team leadership"],
+    "url": "https://campus-cops.web.app",
+    "linkLabel": "Visit the app",
+    "notes": [
+      {"heading": "The question", "text": "How could campus safety reporting be faster and clearer for students?"},
+      {"heading": "My part", "text": "I led a four-person team as we built a web app focused on campus safety. It gave me experience connecting a user-facing problem with the decisions involved in building and shipping an app."},
+      {"heading": "The build", "text": "The project uses React and is deployed with Firebase. You can visit the live app to see the team's work."}
+    ]
+  },
+  {
+    "id": "digital-access",
+    "number": "03",
+    "title": "Digital Age vs. Seattle's Homeless Elderly",
+    "category": "research",
+    "categoryLabel": "Research",
+    "summary": "UX research into digital accessibility barriers for elderly, unhoused Seattle residents.",
+    "tools": ["UX research", "Figma", "Accessibility"],
+    "url": "#contact",
+    "linkLabel": "Ask me about this project",
+    "notes": [
+      {"heading": "The question", "text": "What happens when services move online, but the people who need them face barriers to digital access?"},
+      {"heading": "The work", "text": "This project explored digital accessibility for elderly, unhoused residents in Seattle and what services could do differently. It brought a research perspective to how I think about designing useful tools."},
+      {"heading": "Let's talk", "text": "Contact me if you'd like to hear more about the research and the thinking behind this project."}
+    ]
+  }
+]
