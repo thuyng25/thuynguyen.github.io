@@ -1,1 +1,9 @@
-<svg viewBox="0 0 660 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="art-title"><title id="art-title">An abstract landscape with a winding path and a rising sun</title><rect width="660" height="330" fill="#d9decf"/><circle cx="486" cy="93" r="45" fill="#f4f0dc"/><path d="M0 213Q115 97 266 208T660 182V330H0Z" fill="#a2ae8d"/><path d="M0 273Q154 170 336 264T660 209V330H0Z" fill="#738464"/><path d="M0 330Q145 242 277 291T660 281V330Z" fill="#495d43"/><path d="M373 330C241 286 473 261 369 227S291 214 316 193" fill="none" stroke="#e9e5d2" stroke-width="17"/></svg>
+<svg width="660" height="330" viewBox="0 0 660 330" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="art-title">
+  <title id="art-title">An abstract landscape with a winding path and a rising sun</title>
+  <rect width="660" height="330" fill="#efebce"/>
+  <circle cx="486" cy="93" r="45" fill="#d6ce93"/>
+  <path d="M0 213Q115 97 266 208T660 182V330H0Z" fill="#a3a380"/>
+  <path d="M0 273Q154 170 336 264T660 209V330H0Z" fill="#d8a48f"/>
+  <path d="M0 330Q145 242 277 291T660 281V330Z" fill="#bb8588"/>
+  <path d="M404 257C400 264 362 275 349 287C332 303 371 318 407 330H328C296 310 309 291 334 280C363 270 396 264 404 257Z" fill="#efebce"/>
+</svg>
