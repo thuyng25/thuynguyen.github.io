@@ -27,4 +27,4 @@ I'm a recent Data Visualization grad from the University of Washington Bothell, 
 
 - Email: [nthuynguyenn25@gmail.com](nthuynguyenn25@gmail.com)
 - LinkedIn: [https://www.linkedin.com/in/nthuynguyenn/](https://www.linkedin.com/in/nthuynguyenn/)
-- GitHub: [@thuyng25](https://github.com/thuyng25
+- GitHub: [@thuyng25](https://github.com/thuyng25)
