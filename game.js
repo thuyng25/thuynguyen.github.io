@@ -83,7 +83,7 @@
       dot.type = 'button';
       dot.className = 'game-dot';
       dot.setAttribute('aria-label', `Dot ${index + 1}`);
-      dot.style.backgroundColor = `hsl(95, 26%, ${index === outlier ? 48 + shadeDifference : 48}%)`;
+      dot.style.backgroundColor = `hsl(60, 16%, ${index === outlier ? 57 + shadeDifference : 57}%)`;
       dot.addEventListener('click', () => {
         if (!playing || paused) return;
         if (performance.now() >= deadline) {
